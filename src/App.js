@@ -11,14 +11,24 @@ import {
   NavLink
 } from "react-router-dom";
 
-function App() {
+const App = () => {
+  let handleSubmit = () => {
+    console.log('test');
+  }
+
   return (
-    <div className="container">      
-      <SearchForm />
-      <Nav />
-      <PhotoContainer />
-      <h1>{ApiKey}</h1>
-    </div>
+    <Router>
+      {
+        handleSubmit()
+      }
+      <div className="container">      
+        <SearchForm />
+        <Nav />
+        <PhotoContainer />
+        <h1>{ApiKey}</h1>
+      </div>
+    </Router> 
+    
   );
 }
 
