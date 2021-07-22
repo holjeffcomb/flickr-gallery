@@ -10,26 +10,50 @@ import {
   Link,
   NavLink
 } from "react-router-dom";
+import React, { Component } from 'react';
 
-const App = () => {
-  let handleSubmit = () => {
-    console.log('test');
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      searchValue: 'money',
+      images: []
+    };
   }
 
-  return (
-    <Router>
-      {
-        handleSubmit()
-      }
-      <div className="container">      
-        <SearchForm />
-        <Nav />
-        <PhotoContainer />
-        <h1>{ApiKey}</h1>
-      </div>
-    </Router> 
-    
-  );
+  componentDidMount() {
+    fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${ApiKey}&tags=${this.state.searchValue}&per_page=24&format=json&nojsoncallback=1`)
+      .then(response => response.json())
+      .then(responseData => {
+        this.setState({images: responseData});
+      }); 
+  }
+
+  handleSubmit = (search) => {
+    search.preventDefault();
+    console.log(search);
+    console.log(this.state.searchValue);
+    this.setState(() => {
+      return {searchValue: search}
+    });
+    console.log(this.state.searchValue);
+  }
+
+  render() {
+    return (
+      <Router>
+        <div className="container">      
+          <SearchForm searchValue={this.state.searchValue} onSubmit={this.handleSubmit} />
+          <Nav />
+          <PhotoContainer />
+          <h1>{ApiKey}</h1>
+        </div>
+      </Router> 
+      
+    );
+  }
+
+  
 }
 
 export default App;
