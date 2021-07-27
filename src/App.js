@@ -16,7 +16,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      searchValue: 'money',
+      searchValue: 'tommyboy',
       images: []
     };
   }
@@ -25,7 +25,7 @@ class App extends Component {
     fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${ApiKey}&tags=${this.state.searchValue}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => response.json())
       .then(responseData => {
-        this.setState({images: responseData});
+        this.setState({images: responseData.photos});
       }); 
   }
 
@@ -41,7 +41,7 @@ class App extends Component {
     fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${ApiKey}&tags=${this.state.searchValue}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => response.json())
       .then(responseData => {
-        this.setState({images: responseData});
+        this.setState({images: responseData.photos});
       }); 
   }
 
@@ -51,7 +51,7 @@ class App extends Component {
         <div className="container">      
           <SearchForm onSubmit={this.handleSubmit} />
           <Nav />
-          <PhotoContainer />
+          <PhotoContainer images={this.state.images}/>
         </div>
       </Router> 
       
