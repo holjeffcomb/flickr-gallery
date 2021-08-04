@@ -16,17 +16,13 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      searchValue: 'tommyboy',
+      searchValue: 'house',
       images: []
     };
   }
 
   componentDidMount() {
-    fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${ApiKey}&tags=${this.state.searchValue}&per_page=24&format=json&nojsoncallback=1`)
-      .then(response => response.json())
-      .then(responseData => {
-        this.setState({images: responseData.photos});
-      }); 
+    this.fetchData(this.state.searchValue);
   }
 
   handleSubmit = (search) => {
@@ -38,7 +34,7 @@ class App extends Component {
   }
 
   fetchData = (search) => {
-    fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${ApiKey}&tags=${this.state.searchValue}&per_page=24&format=json&nojsoncallback=1`)
+    fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${ApiKey}&tags=${search}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => response.json())
       .then(responseData => {
         this.setState({images: responseData.photos});
@@ -48,10 +44,11 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="container">      
+        <div className="container">  
+            
           <SearchForm onSubmit={this.handleSubmit} />
           <Nav />
-          <PhotoContainer images={this.state.images}/>
+          <PhotoContainer images={this.state.images} />
         </div>
       </Router> 
       

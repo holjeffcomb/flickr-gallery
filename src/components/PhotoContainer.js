@@ -1,34 +1,16 @@
 import React, { Component } from 'react';
 import Photo from './Photo';
+
 class PhotoContainer extends Component {
-
-    
-
     render () {
 
         let photos;
 
         if (this.props.images.photo) {
             photos = this.props.images.photo.map(photo => {
-                return <Photo id={photo.id} secret={photo.secret} server={photo.server}/>
+                return <Photo key={photo.id} id={photo.id} secret={photo.secret} server={photo.server}/>
             });
         }
-
-        console.log(photos);
-
-
-
-        
-
-        
-
-        // const photos = this.props.images.photos.map(photo => {
-        //     return {
-        //         id: photo.id,
-        //         secret: photo.secret,
-        //         server: photo.server
-        //     }
-        // });
 
         
 
@@ -42,18 +24,6 @@ class PhotoContainer extends Component {
                     }
 
                     
-                    <li>
-                        <img src="https://farm5.staticflickr.com/4334/37032996241_4c16a9b530.jpg" alt="" />
-                    </li>
-                    <li>
-                        <img src="https://farm5.staticflickr.com/4342/36338751244_316b6ee54b.jpg" alt="" />
-                    </li>
-                    <li>
-                        <img src="https://farm5.staticflickr.com/4343/37175099045_0d3a249629.jpg" alt="" />
-                    </li>
-                    <li>
-                        <img src="https://farm5.staticflickr.com/4425/36337012384_ba3365621e.jpg" alt="" />
-                    </li>
                     { 
                         //Not Found 
                     }
