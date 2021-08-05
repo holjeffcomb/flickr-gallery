@@ -4,6 +4,8 @@ import Photo from './Photo';
 class PhotoContainer extends Component {
     render () {
 
+        const { match: {params} } = this.props;
+
         let photos;
 
         if (this.props.images.photo) {
@@ -12,7 +14,7 @@ class PhotoContainer extends Component {
             });
         }
 
-        
+        console.log(params);
 
         return (
             <div className="photo-container">

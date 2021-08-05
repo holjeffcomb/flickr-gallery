@@ -48,7 +48,8 @@ class App extends Component {
             
           <SearchForm onSubmit={this.handleSubmit} />
           <Nav />
-          <PhotoContainer images={this.state.images} />
+          <Route path="/search/:query" render={(props) => <PhotoContainer {...props} images={this.state.images} /> } /> 
+          
         </div>
       </Router> 
       
