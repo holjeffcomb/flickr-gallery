@@ -3,6 +3,9 @@ import Photo from './Photo';
 
 const PhotoContainer = (props) => {
 
+    const { match: {params}} = props;
+    console.log(params.query);
+
     let photos;
 
     if (props.images.photo) {

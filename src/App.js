@@ -49,7 +49,7 @@ class App extends Component {
           <Route 
             exact path="/" 
             render={
-              () => <PhotoContainer images={this.state.images} /> 
+              (props) => <PhotoContainer {...props} images={this.state.images} /> 
             }   
           />
 
