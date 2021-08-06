@@ -1,8 +1,7 @@
 import './css/index.css';
 import SearchForm from './components/SearchForm';
 import Nav from './components/Nav';
-import SearchPhotoContainer from './components/SearchPhotoContainer';
-import URLPhotoContainer from './components/URLPhotoContainer';
+import PhotoContainer from './components/PhotoContainer';
 import ApiKey from './config';
 import {
   BrowserRouter as Router,
@@ -50,14 +49,14 @@ class App extends Component {
           <Route 
             exact path="/" 
             render={
-              () => <SearchPhotoContainer images={this.state.images} /> 
+              () => <PhotoContainer images={this.state.images} /> 
             }   
           />
 
           <Route 
             path="/search/:query" 
             render={
-              (props) => <URLPhotoContainer {...props} images={this.state.images} /> 
+              (props) => <PhotoContainer {...props} images={this.state.images} /> 
             }   
           />
         </div>
