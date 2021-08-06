@@ -4,7 +4,7 @@ class SearchForm extends Component {
 
    submit = (e) => {
         e.preventDefault();
-        this.props.onSubmit(this.name.value);
+        this.props.onSubmit(this.name.value);   
     }
 
     render() {

@@ -1,15 +1,13 @@
 import React from 'react';
 import Photo from './Photo';
 
-const PhotoContainer = (props) => {
-
+const SearchPhotoContainer = (props) => {
+    
     let photos;
 
     if (props.images.photo) {
         photos = props.images.photo.map(photo => <Photo key={photo.id} id={photo.id} secret={photo.secret} server={photo.server} />);
     } 
-
-
 
     return (
         <div className="photo-container">
@@ -31,7 +29,7 @@ const PhotoContainer = (props) => {
             </ul>
         </div>
     );
-    
+
 }
 
-export default PhotoContainer;
+export default SearchPhotoContainer;

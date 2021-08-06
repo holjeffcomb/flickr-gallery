@@ -1,34 +1,33 @@
 import './css/index.css';
 import SearchForm from './components/SearchForm';
 import Nav from './components/Nav';
-import PhotoContainer from './components/PhotoContainer';
+import SearchPhotoContainer from './components/SearchPhotoContainer';
+import URLPhotoContainer from './components/URLPhotoContainer';
 import ApiKey from './config';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  NavLink
+  Route
 } from "react-router-dom";
 import React, { Component } from 'react';
+import { createBrowserHistory } from 'history';
+
+let history = createBrowserHistory();
+let defaultSearchValue = 'house';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      searchValue: 'house',
       images: []
     };
   }
 
   componentDidMount() {
-    this.fetchData(this.state.searchValue);
+    this.fetchData(defaultSearchValue);
   }
 
   handleSubmit = (search) => {
-    this.setState({
-      searchValue: search
-    });
+    history.push(`/search/${search}`);    
     this.fetchData(search);
     
   }
@@ -45,11 +44,22 @@ class App extends Component {
     return (
       <Router>
         <div className="container">  
-            
           <SearchForm onSubmit={this.handleSubmit} />
           <Nav />
-          <Route path="/search/:query" render={(props) => <PhotoContainer {...props} images={this.state.images} /> } /> 
-          
+
+          <Route 
+            exact path="/" 
+            render={
+              () => <SearchPhotoContainer images={this.state.images} /> 
+            }   
+          />
+
+          <Route 
+            path="/search/:query" 
+            render={
+              (props) => <URLPhotoContainer {...props} images={this.state.images} /> 
+            }   
+          />
         </div>
       </Router> 
       
