@@ -91,7 +91,9 @@ class App extends Component {
               <Route 
                 exact path="/search/:query" 
                 render={
-                  () => <PhotoContainer images={this.state.images} />
+                  () => <PhotoContainer
+                          images={this.state.images} 
+                        />
                 }   
               />
 
