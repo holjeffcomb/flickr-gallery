@@ -1,5 +1,5 @@
 import React from 'react'
-import img from '../Images/koda-sad.png'
+import img from '../Images/sad-robot.JPG'
 
 // Results not found message to display when there is no valid search submit
 const NoResults = () =>{

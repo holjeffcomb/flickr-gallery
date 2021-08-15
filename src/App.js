@@ -12,17 +12,14 @@ import {
 } from "react-router-dom";
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import loading from './Images/loading.gif';
+import loading from './Images/loading-2.gif';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      images: [],
-      isLoading: true,
-      searchValue: 'cacti'
-    };
-  }
+  state = {
+    images: [],
+    isLoading: true,
+    searchValue: 'desert'
+  };
 
   componentDidMount() {
     this.search(this.state.searchValue);
@@ -41,8 +38,8 @@ class App extends Component {
       .then(response => response.json())
       .then(responseData => {
         this.setState({
-          images: responseData.photos,
           isLoading: false,
+          images: responseData.photos,
           searchValue: query
         });
       }); 
