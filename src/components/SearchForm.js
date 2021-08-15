@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 
 class SearchForm extends Component {
 
-   submit = (e) => {
+   handleSubmit = (e) => {
         e.preventDefault();
         this.props.onSubmit(this.name.value);   
+        this.props.history.push(`/search/${this.name.value}`);
+        e.currentTarget.reset();
     }
 
     render() {
         return (
-            <form className="search-form" onSubmit={this.submit}>
+            <form className="search-form" onSubmit={this.handleSubmit}>
                 <input type="search" name="search" placeholder="Search" ref={ (input) => this.name = input } required/>
                 <button type="submit" className="search-button">
                 <svg fill="#fff" height="24" viewBox="0 0 23 23" width="24" xmlns="http://www.w3.org/2000/svg">

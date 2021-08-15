@@ -1,16 +1,25 @@
 import React from 'react';
 import Photo from './Photo';
+import NoResults from './NoResults';
 
 const PhotoContainer = (props) => {
 
-    const { match: {params}} = props;
-    console.log(params.query);
-
+    const results = props.images.photo;
     let photos;
 
-    if (props.images.photo) {
-        photos = props.images.photo.map(photo => <Photo key={photo.id} id={photo.id} secret={photo.secret} server={photo.server} />);
-    } 
+    if (results.length > 0) {
+        photos = results.map(photo => 
+            <Photo 
+                key={photo.id} 
+                id={photo.id} 
+                secret={photo.secret} 
+                server={photo.server} 
+                alt={photo.title}
+            />
+        );
+    } else {
+        return (<NoResults />);
+    }
 
 
 
@@ -20,17 +29,9 @@ const PhotoContainer = (props) => {
             <ul>
 
                 {
-                    photos ? photos : <p>Loading...</p>
+                    photos 
                 }
-
                 
-                { 
-                    //Not Found 
-                }
-                <li className="not-found">
-                    <h3>No Results Found</h3>
-                    <p>You search did not return any results. Please try again.</p>
-                </li>
             </ul>
         </div>
     );
