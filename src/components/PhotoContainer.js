@@ -1,38 +1,43 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Photo from './Photo';
 import NoResults from './NoResults';
 
-const PhotoContainer = (props) => {
+class PhotoContainer extends Component {
 
-    const results = props.images.photo;
-    let photos;
+    render() {
+        const results = this.props.images.photo;
+        let photos;
 
-    if (results.length > 0) {
-        photos = results.map(photo => 
-            <Photo 
-                key={photo.id} 
-                id={photo.id} 
-                secret={photo.secret} 
-                server={photo.server} 
-                alt={photo.title}
-            />
+        // populate photos array with Photo JSX objects
+        if (results.length > 0) {
+            photos = results.map(photo => 
+                <Photo 
+                    key={photo.id} 
+                    id={photo.id} 
+                    secret={photo.secret} 
+                    server={photo.server} 
+                    alt={this.props.alt}
+                />
+            );
+        } else {
+            return (<NoResults />);
+        }
+
+
+
+        return (
+            <div className="photo-container">
+                <h2>Results</h2>
+                <ul>
+                    {
+                        photos 
+                    }       
+                </ul>
+            </div>
         );
-    } else {
-        return (<NoResults />);
     }
 
-
-
-    return (
-        <div className="photo-container">
-            <h2>Results</h2>
-            <ul>
-                {
-                    photos 
-                }       
-            </ul>
-        </div>
-    );
+    
     
 }
 

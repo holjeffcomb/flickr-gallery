@@ -21,10 +21,12 @@ class App extends Component {
     searchValue: 'desert'
   };
 
+  // fetch default images upon loading app
   componentDidMount() {
     this.search(this.state.searchValue);
   }
 
+  // method to handle forward/back buttons
   componentDidUpdate(prevProps) {
     if( this.props.location.pathname !== prevProps.location.pathname ) {
       this.search(this.props.location.pathname.replace('/search/', ''))
@@ -42,6 +44,8 @@ class App extends Component {
           images: responseData.photos,
           searchValue: query
         });
+        console.log("SEARCH");
+        console.log(this.state.images);
       }); 
   }
 
@@ -63,36 +67,54 @@ class App extends Component {
               <Route 
                 exact path="/" 
                 render={
-                  () => <PhotoContainer images={this.state.images} />
+                  () => <PhotoContainer 
+                    images={this.state.images} 
+                    alt={this.state.searchValue}
+                    search={this.search}  
+                    />
                 }   
               />
 
               <Route 
                 path="/cats" 
                 render={
-                  () => <PhotoContainer images={cats} />
+                  () => <PhotoContainer 
+                    images={cats} 
+                    alt='Cats'
+                    search={this.search}  
+                    />
                 }   
               />
 
               <Route 
                 path="/dogs" 
                 render={
-                  () => <PhotoContainer images={dogs} />
+                  () => <PhotoContainer 
+                    images={dogs} 
+                    alt='Dogs'
+                    search={this.search}  
+                    />
                 }   
               />
 
               <Route 
                 path="/computers" 
                 render={
-                  () => <PhotoContainer images={computers} />
+                  () => <PhotoContainer 
+                    images={computers} 
+                    alt='Computers'
+                    search={this.search}  
+                    />
                 }   
               />
               
               <Route 
                 exact path="/search/:query" 
                 render={
-                  () => <PhotoContainer
+                  ({ match }) => <PhotoContainer
                           images={this.state.images} 
+                          alt={match.params.query}
+                          search={this.search}
                         />
                 }   
               />
